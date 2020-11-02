@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Live Covid-19 Tracker</title>
+	<link rel="stylesheet" type="text/css" href="css/style2.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" />
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+
+
+<!-- *******************header starts ************************ -->	
+
+<nav class="navbar navbar-expand-lg bg-dark navbar-light ">
+	<div class="container text-uppercase p-2 navbar_font">
+	  <a class="navbar-brand text-white" href="#">Covid-19</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    <ul class="navbar-nav ml-auto ">
+	      <li class="nav-item active">
+	        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+	      </li>
+	      
+	      
+	    </ul>
+
+	  </div>
+	 </div>
+</nav>
+<!-- ******************* header ends ************************ -->	
+<!-- ******************* India corona starts ************************ -->	
+
+	<section class="corona_update container-fluid">
+		<div class="section_header text-center mt-5 mb-5">
+			<h2>COVID-19 Live Update of the india</h2>
+		</div>
+		<div  class="table-responsive">
+			<table class="table table-bordered table-striped text-center" id="tbvle">
+				<thead>
+					<tr>
+						<th class="text-capitalize">lastupdatedtime</th>
+						<th class="text-capitalize">state</th>
+						<th class="text-capitalize">confirmed</th>
+						<th class="text-capitalize">active</th>
+						<th class="text-capitalize">recovered</th>
+						<th class="text-capitalize">deaths</th>
+					</tr>
+				
+		<?php
+			$data = file_get_contents('https://api.covid19india.org/data.json');
+			$coronadata = json_decode($data,true);
+			 //echo "<pre>";
+			 //print_r($coronadata);	
+			 // echo $coronadata['statewise'][1]['state'];
+
+			 $statecount = count($coronadata['statewise']);
+
+			 $i=1;
+			 while($i < $statecount){
+			 		?>
+
+			 		<tr>
+			 			<td><?php echo $coronadata['statewise'][$i]['lastupdatedtime']?></td>
+			 			<td><?php echo $coronadata['statewise'][$i]['state']?></td>
+			 			<td><?php echo $coronadata['statewise'][$i]['confirmed']?></td>
+			 			<td><?php echo $coronadata['statewise'][$i]['active']?></td>
+			 			<td><?php echo $coronadata['statewise'][$i]['recovered']?></td>
+			 			<td><?php echo $coronadata['statewise'][$i]['deaths']?></td>
+			 				
+			 		</tr>
+			<!-- 	echo $coronadata['statewise'][$i]['lastupdatedtime']."<br>";
+			 	echo $coronadata['statewise'][$i]['state']."<br>";
+			 	echo $coronadata['statewise'][$i]['confirmed']."<br>";
+			 	echo $coronadata['statewise'][$i]['active']."<br>";
+			 	echo $coronadata['statewise'][$i]['recovered']."<br>";
+			 	echo $coronadata['statewise'][$i]['deaths']."<br>";
+		  -->
+			 	<?php
+			 	$i++;	
+			}
+			
+		?> 
+				</thead>
+			</table>
+		</div>
+	</section>
+
+<!-- ******************* India corona starts ************************ -->	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12 footer">
+				<p>Created by rahul tech</p>
+			</div>
+		</div>
+	</div>
+ 	<!-- <script type="text/javascript" src="js/script.js"></script> -->
+
+	 <!-- jQuery library -->
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	  <!-- Popper JS -->
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+	  <!-- Latest compiled JavaScript -->
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
